@@ -45,7 +45,8 @@
 			text-sm
 			w-full
 			md:w-auto
-			my-1 md:my-0
+			my-1 
+			md:my-0
 			cursor-default
 		"
 		class:cursor-pointer={!$address}
@@ -57,7 +58,7 @@
 		{/if}
 
 		<span
-			class="overflow-ellipsis overflow-hidden w-48 md:w-32 lg:w-auto max-w-xs
+			class="overflow-ellipsis overflow-hidden w-24 md:w-32 lg:w-auto max-w-xs
 	">{legend}</span
 		>
 	</button>
