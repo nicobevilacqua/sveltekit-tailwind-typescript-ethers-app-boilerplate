@@ -5,13 +5,29 @@ import { getCreateNetworkDataByChainId, getNetworkByChainId } from '../utils/net
 
 import { Web3Provider } from '@ethersproject/providers';
 
+const localhostNetwork = {
+	name: 'Localhost',
+	chainId: 1337,
+	nativeCurrency: {
+		name: 'Ethereum',
+		symbol: 'ETH',
+		decimals: 18
+	},
+	rpc: ['http://localhost:8545/'],
+	explorers: [{ url: 'http://localhost:8545/' }]
+};
+
 import type { WindowWithEthereum } from '../types';
 import type { Signer } from 'ethers';
 
 const expectedChainId = parseInt(import.meta.env.VITE_CHAIN_ID, 10);
 
 export const metamask = readable<boolean>(browser && window && (window as any).ethereum);
-export const expectedNetwork = readable(getNetworkByChainId(expectedChainId));
+export const expectedNetwork = readable(
+	expectedChainId === localhostNetwork.chainId
+		? localhostNetwork
+		: getNetworkByChainId(expectedChainId)
+);
 export const address = writable<null | string>(null);
 export const provider = writable<null | Web3Provider>(null);
 export const signer = writable<null | Signer>(null);
