@@ -20,28 +20,28 @@
 
 	let progressInterval: ReturnType<typeof setInterval>;
 
-	// const unsubscribe = show.subscribe((show) => {
-	// 	if (!show) {
-	// 		clearInterval(progressInterval);
-	// 		return;
-	// 	}
+	const unsubscribe = show.subscribe((show) => {
+		if (!show) {
+			clearInterval(progressInterval);
+			return;
+		}
 
-	// 	if ($config.duration) {
-	// 		progress.set(0);
+		if ($config.duration) {
+			progress.set(0);
 
-	// 		const step = $config.duration / 10;
+			const step = $config.duration / 10;
 
-	// 		progressInterval = setInterval(() => {
-	// 			if ($progress >= 1) {
-	// 				hideNotification();
-	// 				return;
-	// 			}
-	// 			progress.set($progress + 0.1);
-	// 		}, step);
-	// 	}
-	// });
+			progressInterval = setInterval(() => {
+				if ($progress >= 1) {
+					hideNotification();
+					return;
+				}
+				progress.set($progress + 0.1);
+			}, step);
+		}
+	});
 
-	// onDestroy(unsubscribe);
+	onDestroy(unsubscribe);
 
 	const icons: Record<number, any> = {
 		[NotificationType.Error]: TiCancel,
@@ -91,7 +91,9 @@
     "
 		>
 			<div class="flex flex-row items-center mr-10">
-				<svelte:component this={icon} />
+				<div class="w-10 h-10">
+					<svelte:component this={icon} />
+				</div>
 				<div class="ml-3 text-sm font-normal">{$message}</div>
 			</div>
 

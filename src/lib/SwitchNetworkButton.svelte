@@ -7,12 +7,15 @@
 	let loading = false;
 	async function onSwitchNetwork() {
 		loading = true;
+		showNotification('Switching network', {
+			type: NotificationType.Error, 
+		});
 		try {
 			await switchNetwork();
 		} catch (error: any) {
 			showNotification(error.message, {
 				type: NotificationType.Error, 
-			})
+			});
 		}
 		loading = false;
 	}
